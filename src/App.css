@@ -1,9 +1,11 @@
-@import "tailwindcss";
+/* @import "tailwindcss";
+
+
 .app-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    font-family: Arial, sans-serif;
+    font-family: "IBM Plex Mono", monospace;
   }
   
   header {
@@ -142,4 +144,4 @@
     display: block;
     margin: 30px auto 0;
     background-color: #4caf50;
-  }
+  } */

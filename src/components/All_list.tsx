@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import { Link } from 'react-router-dom';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+
 
 // Initialize Supabase client
-const supabaseUrl = import.meta.env.REACT_APP_SUPABASE_URL|| '';
-const supabaseKey = import.meta.env.REACT_APP_SUPABASE_ANON_KEY|| '';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -37,9 +38,7 @@ const AllList: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchEntries();
-  }, []);
-
+    
   const fetchEntries = async () => {
     try {
       setLoading(true);
@@ -82,6 +81,9 @@ const AllList: React.FC = () => {
       setLoading(false);
     }
   };
+    fetchEntries();
+  }, []);
+
 
   const toggleExpand = (id: number) => {
     setEntries(entries.map(entry => 
@@ -105,20 +107,15 @@ const AllList: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <div className="mb-6">
-        <Link to="/home" className="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-          Add New Entry
-        </Link>
-      </div>
+     
       
       {error && <div className="text-red-600 mt-2">{error}</div>}
       
       <div>
-        <h2 className="text-xl font-bold mb-4 text-gray-800">All Entries ({entries.length})</h2>
+      
         
         {entries.length === 0 ? (
           <div className="text-gray-500 italic">
-            <p>No entries found. Click Add New Entr to create one.</p>
           </div>
         ) : (
           entries.map(entry => (
@@ -128,18 +125,18 @@ const AllList: React.FC = () => {
                 onClick={() => toggleExpand(entry.id)}
               >
                 <h3 className="text-lg font-medium text-gray-800">{entry.name}</h3>
-                <span className="text-gray-500">{entry.expanded ? '▼' : '►'}</span>
+                <span className="text-gray-500">{entry.expanded ? <ChevronUp/> : <ChevronDown />}</span>
               </div>
               
               {entry.expanded && (
                 <div className="p-4 border-t border-gray-200">
                   <div className="mb-4">
-                    <h4 className="font-medium text-gray-700 mb-1">Overview:</h4>
+                    <h4 className="font-semibold text-gray-700 mb-1">Overview:</h4>
                     <p>{entry.overview}</p>
                   </div>
                   
                   <div className="mb-4">
-                    <h4 className="font-medium text-gray-700 mb-1">Edges:</h4>
+                    <h4 className="font-semibold text-gray-700 mb-1">Edges:</h4>
                     <div className="overflow-x-auto">
                       <table className="w-full border-collapse mb-2">
                         <thead>
@@ -179,17 +176,17 @@ const AllList: React.FC = () => {
                   </div>
                   
                   <div className="mb-4">
-                    <h4 className="font-medium text-gray-700 mb-1">How It Works:</h4>
+                    <h4 className="font-semibold text-gray-700 mb-1">How It Works:</h4>
                     <p>{entry.how_it_works}</p>
                   </div>
                   
                   <div className="mb-4">
-                    <h4 className="font-medium text-gray-700 mb-1">How to Use:</h4>
+                    <h4 className="font-semibold text-gray-700 mb-1">How to Use:</h4>
                     <p>{entry.how_to_use}</p>
                   </div>
                   
                   <div className="mb-4">
-                    <h4 className="font-medium text-gray-700 mb-1">Troubleshooting Tips:</h4>
+                    <h4 className="font-semibold text-gray-700 mb-1">Troubleshooting Tips:</h4>
                     <p>{entry.troubleshooting_tips}</p>
                   </div>
                 </div>

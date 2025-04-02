@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<AllList />}/>
         <Route path="/admin/signin" element={<Signi/>}/>
-        <Route path="/home" element={<Home/>}/>
+        <Route path="/admin" element={<Home/>}/>
       </Routes>
     </BrowserRouter>
   )

@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 
 const FIXED_USER = {
-  email: "Test1@mail.com",
-  password: "pass@1",
+  email: "admin",
+  password: "aviadmin",
   token: "dummy_token_12345", 
 };
 
@@ -26,7 +26,7 @@ const LoginForm: React.FC = () => {
         console.log("Token already exists.");
       }
 
-      navigate("/home");
+      navigate("/admin");
     } else {
       setError("Invalid credentials. Please try again.");
     }
@@ -39,11 +39,11 @@ const LoginForm: React.FC = () => {
           <div className="space-y-4">
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                Email address
+                Username
               </label>
               <input
                 id="username"
-                type="email"
+                type="text"
                 required
                 placeholder="Email address"
                 value={username}

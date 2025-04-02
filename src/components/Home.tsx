@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { useNavigate } from 'react-router-dom';
+import Admin from './Admin';
 
 // Initialize Supabase client
-const supabaseUrl = import.meta.env.REACT_APP_SUPABASE_URL|| '';
-const supabaseKey = import.meta.env.REACT_APP_SUPABASE_ANON_KEY|| '';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -40,7 +41,7 @@ function Home() {
   
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("auth_token");
     if (!token) {
         navigate("/admin/signin"); 
     }
@@ -98,16 +99,8 @@ function Home() {
     e.preventDefault();
     setIsLoading(true);
     setSubmitStatus('');
-    navigate('/all-list')
-    // Get user session
-    const { data: { session } } = await supabase.auth.getSession();
-  
-    if (!session) {
-      alert("You must be logged in to add a new entry.");
-      setIsLoading(false);
-      return;
-    }
-  
+    navigate('/')
+   
     try {
       const { data: entryData, error: entryError } = await supabase
         .from('noetic_entries')
@@ -165,6 +158,7 @@ function Home() {
   };
 
   return (
+    <>
     <div className="max-w-4xl mx-auto px-4 py-8">
     {!formSubmitted ? (
         <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6">
@@ -390,6 +384,10 @@ function Home() {
         </div>
       )}
     </div>
+    <div className='mt-8 max-w-4xl mx-auto'>
+      <Admin/>
+    </div>
+    </>
   );
 }
 
