@@ -5,9 +5,17 @@ function Navbar() {
 
   return (
     <div className="text-xl flex justify-center item-center gap-5 mt-10 h-20">
-      <p className="hover:text-xl cursor-pointer transition-all duration-300">
+      <a
+        href="https://www.mainly.ai"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-xl cursor-pointer transition-all duration-300"
+      >
         mainly.ai
-      </p>
+      </a>
+{/*       <p className="hover:text-xl cursor-pointer transition-all duration-300">
+        mainly.ai
+      </p> */}
       <Link
         to="/"
         className={`${
